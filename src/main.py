@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+app = FastAPI(title="Travel Planner API", version="0.1.0")
 
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World"}
+    return {"service": "travel-planner", "status": "ok"}
