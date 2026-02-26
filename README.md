@@ -29,7 +29,7 @@ docker compose --profile tools run --rm migrate
 
 4. Open API docs.
 
-- Swagger UI: `http://localhost:8000/docs`
+- Swagger UI: `http://localhost:8000/swagger`
 - ReDoc: `http://localhost:8000/redoc`
 
 ## Environment variables
