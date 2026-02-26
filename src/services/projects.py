@@ -245,3 +245,16 @@ def update_project_place(
     db.commit()
     db.refresh(project_place)
     return _to_project_place_response(project_place)
+
+
+def delete_project(db: Session, project_id: int) -> None:
+    project = _get_project_or_404(db, project_id)
+
+    if any(place.visited for place in project.places):
+        raise HTTPException(
+            status_code=409,
+            detail="Project cannot be deleted because it has visited places",
+        )
+
+    db.delete(project)
+    db.commit()

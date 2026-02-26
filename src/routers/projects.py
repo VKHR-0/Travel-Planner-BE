@@ -16,12 +16,13 @@ from src.schemas import (
 from src.services.projects import (
     add_project_place,
     create_project,
+    delete_project,
     get_project,
     get_project_place,
     list_project_places,
     list_projects,
-    update_project_place,
     update_project,
+    update_project_place,
 )
 
 router = APIRouter(prefix="/projects", tags=["projects"])
@@ -57,6 +58,12 @@ def update_project_endpoint(
     db: Session = Depends(get_db),
 ) -> ProjectWithPlacesResponse:
     return update_project(db, project_id, payload)
+
+
+@router.delete("/{project_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_project_endpoint(project_id: int, db: Session = Depends(get_db)) -> None:
+    delete_project(db, project_id)
+    return None
 
 
 @router.post(
